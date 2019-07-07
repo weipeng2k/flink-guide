@@ -5,6 +5,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.URL;
 
 /**
  * @author weipeng2k 2019年06月30日 下午18:46:04
@@ -33,8 +34,8 @@ public class StreamJob {
          * http://flink.apache.org/docs/latest/apis/streaming/index.html
          *
          */
-
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(StreamJob.class.getResourceAsStream("12factor")));
+        URL url = new URL("https://raw.githubusercontent.com/weipeng2k/flink-guide/master/flink-guide-chapter2/src/main/resources/12factor");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
         StringBuilder sb = new StringBuilder();
         String line = null;
         while ((line = bufferedReader.readLine()) != null) {
@@ -47,7 +48,7 @@ public class StreamJob {
                 .map(word -> new WordWithCount(word, 1))
                 .keyBy("word")
                 .reduce((a, b) -> new WordWithCount(a.getWord(), a.getCount() + b.getCount()))
-                .print();
+                .writeAsText("test.data");
 
         // execute program
         env.execute("Simple StreamJob");
