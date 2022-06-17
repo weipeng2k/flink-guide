@@ -13,7 +13,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-boot.version>1.5.18.RELEASE</spring-boot.version>
-        <fastjson.version>1.2.54</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <flink.version>1.7.2</flink.version>
         <scala.binary.version>2.11</scala.binary.version>
